@@ -1,0 +1,14 @@
+.navegacion {
+  background: rgb(254, 255, 254);
+  background: linear-gradient(180deg, rgba(254, 255, 254, 1) 0%, rgba(204, 249, 223, 1) 100%);
+}
+.btn__iniciar {
+  background: rgb(206, 248, 224);
+  background: linear-gradient(90deg, rgba(206, 248, 224, 1) 0%, rgba(163, 239, 196, 1) 79%, rgba(99, 193, 138, 1) 100%);
+  border-radius: 10px;
+  border-left: none;
+}
+.btn__iniciar a {
+  color: var(--verde_oscuro) !important;
+  font-weight: 700;
+}

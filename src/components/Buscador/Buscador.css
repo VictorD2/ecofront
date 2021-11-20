@@ -1,0 +1,9 @@
+.buscador input {
+  background: #a4f2c5;
+}
+.buscador input::placeholder {
+  color: #000;
+}
+.buscador .btn__search {
+  background: #3cab6a;
+}
