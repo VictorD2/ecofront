@@ -13,7 +13,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-html.sr .show {
+html.sr .mostrar {
   visibility: hidden;
 }
 

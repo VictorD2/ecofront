@@ -8,6 +8,7 @@ const producto: Producto = {
   foto: productoFoto,
   precio: 2,
   cantidad: 1,
+  id_categoria: 0,
 };
 
 export const ListaProductos: React.FC = () => {

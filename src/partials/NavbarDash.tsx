@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { GoSignOut } from "react-icons/go";
-import { useNavigate } from "react-router-dom";
 const NavbarDash: React.FC = () => {
  
   return (

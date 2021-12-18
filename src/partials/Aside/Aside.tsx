@@ -1,42 +1,30 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
+import { TiThSmall } from "react-icons/ti";
 
 import { Link } from "react-router-dom";
+import { useUsuario } from "../../auth/UsuarioProvider";
+import { Categoria } from "../../interface/Categoria";
 
 import "./Aside.css";
-import { MdOutlineFastfood } from "react-icons/md";
-import { IoMdGlasses } from "react-icons/io";
-import { GiMedicinePills, GiNecklaceDisplay, GiNoodles, GiRunningShoe } from "react-icons/gi";
-import RutaInterface from "../../interface/RutaInterface";
-import Ruta from "../../class/Ruta";
 
 const Aside: React.FC = () => {
-  const [rutas, setRutas] = useState<RutaInterface[]>([]);
+  const [listCategories, setListCategories] = useState<Categoria[]>([]);
+  const { categorias, loadCategorias } = useUsuario();
 
   const abrirDropdown = (e: React.MouseEvent<HTMLLIElement | HTMLAnchorElement>) => {
     e.stopPropagation();
     e.currentTarget.classList.toggle("menu-is-opening");
     e.currentTarget.classList.toggle("menu-open");
-    e.currentTarget.children[1].classList.toggle("d-none");
-    e.currentTarget.children[1].classList.toggle("d-block");
-  };
-
-  const getCategorias = async () => {
-    const categorias: RutaInterface[] = [
-      { nombre: "Descartables", link: "/Dashboard/Productos/Descartables", icono: MdOutlineFastfood, rango: 1 },
-      { nombre: "Moda", link: "/Dashboard/Productos/Moda", icono: IoMdGlasses, rango: 1 },
-      { nombre: "Calzado", link: "/Dashboard/Productos/Calzado", icono: GiRunningShoe, rango: 1 },
-      { nombre: "Alimentos", link: "/Dashboard/Productos/Alimentos", icono: GiNoodles, rango: 1 },
-      { nombre: "Salud y bienestar", link: "/Dashboard/Productos/Salud y Bienestar", icono: GiMedicinePills, rango: 1 },
-      { nombre: "Joyería", link: "/Dashboard/Productos/Joyeria", icono: GiNecklaceDisplay, rango: 1 },
-    ];
-    Ruta.agregarRutaCategorias(categorias);
-    setRutas(Ruta.getAllRoutes());
+    // e.currentTarget.children[1].classList.toggle("d-none");
+    // e.currentTarget.children[1].classList.toggle("d-block");
   };
 
   useEffect(() => {
-    getCategorias();
-    return () => setRutas([]);
-  }, []);
+    if (loadCategorias) setListCategories(categorias);
+
+    return () => setListCategories([]);
+  }, [loadCategorias, categorias]);
 
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-4">
@@ -72,41 +60,103 @@ const Aside: React.FC = () => {
               {/* Sidebar Menu */}
               <nav className="mt-2">
                 <ul className="nav nav-pills nav-sidebar flex-column nav-flat nav-legacy nav-compact nav-child-indent nav-collapse-hide-child" data-widget="treeview" role="menu" data-accordion="false">
-                  {rutas.map((ruta, index) => {
-                    if (ruta.rutasHija) {
-                      return (
-                        <>
-                          <li key={index} onClick={abrirDropdown} className="nav-item">
-                            <Link to={ruta.link} className="nav-link">
-                              {typeof ruta.icono === "string" ? <i className={`nav-icon ${ruta.icono}`} /> : <ruta.icono className="nav-icon" />}
-                              {ruta.nombre}
-                              <i className="right fas fa-angle-left" />
-                            </Link>
-                            <ul key={index} className="nav nav-treeview d-none">
-                              {ruta.rutasHija.map((ruta2, i) => {
-                                return (
-                                  <li key={i + 100} className="nav-item">
-                                    <Link to={ruta2.link} className="nav-link">
-                                      {typeof ruta2.icono === "string" ? <i className={`nav-icon ${ruta.icono}`}></i> : <ruta2.icono className="nav-icon" />}
-                                      <p>{ruta2.nombre}</p>
-                                    </Link>
-                                  </li>
-                                );
-                              })}
-                            </ul>
-                          </li>
-                        </>
-                      );
-                    }
-                    return (
-                      <li key={index} className="nav-item">
-                        <Link to={ruta.link} className="nav-link">
-                          {typeof ruta.icono === "string" ? <i className={`nav-icon ${ruta.icono}`} /> : <ruta.icono className="nav-icon" />}
-                          <p>{ruta.nombre}</p>
+                  {/* Inicio */}
+                  <li className="nav-item">
+                    <Link to="/Dashboard" className="nav-link">
+                      <i className="fas fa-home nav-icon"></i>
+                      <p>Inicio</p>
+                    </Link>
+                  </li>
+
+                  {/* Productos */}
+                  <li className="nav-item" onClick={abrirDropdown}>
+                    <Link to="#" className="nav-link">
+                      <i className="fas fa-copy nav-icon"></i>
+                      <p>Productos</p>
+                      <i className="right fas fa-angle-left"></i>
+                    </Link>
+
+                    {/* Lista de categorías */}
+                    <ul className="nav nav-treeview">
+                      <li className="nav-item">
+                        <Link to="/Dashboard/Productos/Todos" className="nav-link">
+                          <TiThSmall className="nav-icon" />
+                          <p>Todos</p>
                         </Link>
                       </li>
-                    );
-                  })}
+                      {listCategories.map((category, index) => {
+                        return (
+                          <li className="nav-item" key={index}>
+                            <ListItem category={category} />
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </li>
+
+                  {/* Categorias */}
+                  <li className="nav-item">
+                    <Link to="/Dashboard/Categorias" className="nav-link">
+                      <i className="fas fa-list nav-icon"></i>
+                      <p>Categorias</p>
+                    </Link>
+                  </li>
+
+                  {/* Marketing */}
+                  <li className="nav-item">
+                    <Link to="/Dashboard/Marketing" className="nav-link">
+                      <i className="fas fa-bullhorn nav-icon"></i>
+                      <p>Marketing</p>
+                    </Link>
+                  </li>
+
+                  {/* Estadisticas */}
+                  <li className="nav-item" onClick={abrirDropdown}>
+                    <Link to="#" className="nav-link">
+                      <i className="fas fa-chart-bar nav-icon"></i>
+                      <p>Estadisticas</p>
+                      <i className="right fas fa-angle-left"></i>
+                    </Link>
+                    {/* Lista de estadisticas */}
+                    <ul className="nav nav-treeview">
+                      <li className="nav-item">
+                        <Link to="/Dashboard/Estadisticas/Empresas" className="nav-link">
+                          <i className="fas fa-book nav-icon"></i>
+                          <p>Ranking de Empresas</p>
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link to="/Dashboard/Estadisticas/Ventas" className="nav-link">
+                          <i className="fas fa-book nav-icon"></i>
+                          <p>Ventas Mensuales</p>
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+
+                  {/* Pedidos */}
+                  <li className="nav-item">
+                    <Link to="/Dashboard/Pedidos" className="nav-link">
+                      <i className="fas fa-shopping-cart nav-icon"></i>
+                      <p>Pedidos</p>
+                    </Link>
+                  </li>
+
+                  {/* Empresas */}
+                  <li className="nav-item">
+                    <Link to="/Dashboard/Empresas" className="nav-link">
+                      <i className="fas fa-building nav-icon"></i>
+                      <p>Empresas</p>
+                    </Link>
+                  </li>
+
+                  {/* Clientes */}
+                  <li className="nav-item">
+                    <Link to="/Dashboard/Clientes" className="nav-link">
+                      <i className="fas fa-users nav-icon"></i>
+                      <p>Clientes</p>
+                    </Link>
+                  </li>
                 </ul>
               </nav>
               {/* /.sidebar-menu */}
@@ -127,6 +177,26 @@ const Aside: React.FC = () => {
       </div>
       {/* /.sidebar */}
     </aside>
+  );
+};
+
+interface Props {
+  category: Categoria;
+}
+const ListItem: React.FC<Props> = ({ category }) => {
+  const refItem = useRef<HTMLAnchorElement>(null);
+  const cargar = () => {
+    if (refItem.current) refItem.current.innerHTML = category.icono?.replace(/fs-1/g, "nav-icon") + `<p>${category.nombre}</p>`;
+  };
+  useEffect(() => {
+    cargar();
+    return () => {};
+  }, []);
+
+  return (
+    <Link ref={refItem} to={`/Dashboard/Productos${category.url}`} className="nav-link">
+      <p>{category.nombre}</p>
+    </Link>
   );
 };
 

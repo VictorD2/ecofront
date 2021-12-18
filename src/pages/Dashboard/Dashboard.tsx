@@ -3,19 +3,18 @@ import { Link } from "react-router-dom";
 import { ContenedorDashboard } from "../../components/ContenedorDashboard/ContenedorDashboard";
 import { HeaderDashboard } from "../../components/ContenedorDashboard/HeaderDashboard";
 import { configScrollReveal } from "../../config/config";
-import DashboardLayout from "../../partials/LayoutDash";
 import ScrollReveal from "scrollreveal";
 import { ContenidoDashboard } from "../../components/ContenedorDashboard/ContenidoDashboard";
 export const Dashboard = () => {
   useEffect(() => {
     window.scrollTo({ top: 0 });
     //Para los efectos de aparicion
-    ScrollReveal().reveal(".show", configScrollReveal);
+    ScrollReveal().reveal(".mostrar", configScrollReveal);
     return () => {};
   }, []);
 
   return (
-    <main className="show">
+    <main className="mostrar">
       <ContenedorDashboard>
         {/* Cabecera */}
         <HeaderDashboard titulo={"Dashboard"}>

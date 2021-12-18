@@ -12,14 +12,14 @@ import { configScrollReveal } from "../../config/config";
 const Login: React.FC = () => {
   useEffect(() => {
     window.scrollTo({ top: 0 });
-    ScrollReveal().reveal(".show", configScrollReveal);
+    ScrollReveal().reveal(".mostrar", configScrollReveal);
     return () => {};
   }, []);
 
   return (
     <>
       <ToastContainer />
-      <div className="content-main show">
+      <div className="content-main mostrar">
         <div className="container px-5">
           <div className="d-flex justify-content-center my-5">
             <Link to="/">

@@ -1,0 +1,21 @@
+.botonCarrito {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+}
+.botonCarrito .btn-carrito {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  font-size: 50px;
+  box-shadow: 2px 2px 2px #000;
+  background: rgb(254, 255, 254);
+  background: linear-gradient(310deg, rgba(254, 255, 254, 1) 10%, rgba(43, 161, 92, 1) 100%);
+  transition: all 0.5s;
+}
+.botonCarrito .btn-carrito:hover {
+  filter: contrast(180%);
+  box-shadow: 0px 0px 0px #000;
+
+  transition: all 0.5s;
+}

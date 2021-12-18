@@ -2,7 +2,7 @@ import "./Buscador.css";
 import { AiOutlineSearch } from "react-icons/ai";
 export const Buscador: React.FC = () => {
   return (
-    <div className="buscador me-5">
+    <div className="buscador">
       <form>
         <div className="d-flex">
           <input className="form-control me-1" type="text" placeholder="Buscar Producto" />

@@ -13,7 +13,7 @@ import { AiOutlinePhone } from "react-icons/ai";
 const Footer: React.FC = () => {
   return (
     <>
-      <div className="show">
+      <div className="mostrar">
         <div style={{ background: "#232323" }}>
           <div className="container">
             <footer className="footer py-4 py-md-5 py-lg-5 row justify-content-around">

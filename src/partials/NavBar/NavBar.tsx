@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //Imagenes
 import logo from "../../images/logo.png";
@@ -15,7 +15,7 @@ const NavBar: React.FC = () => {
 
   return (
     <>
-      <header className="show">
+      <header className="mostrar">
         <nav className="navbar navbar-expand-lg navbar-light bg-light navegacion">
           <div className="container-fluid text-center">
             <Link className="navbar-brand" to="/">

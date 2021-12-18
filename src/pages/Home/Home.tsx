@@ -18,15 +18,15 @@ export const Home: React.FC = () => {
     window.scrollTo({ top: 0 });
     //Para los efectos de aparicion
 
-    ScrollReveal().reveal(".show", configScrollReveal);
+    ScrollReveal().reveal(".mostrar", configScrollReveal);
     return () => {};
   }, []);
 
   return (
-    <main className="d-flex my-5 position-relative w-100 h-100 show">
+    <main className="d-flex flex-column flex-lg-row my-5 position-relative w-100 h-100 mostrar principal">
       <MenuLateral />
       <ContenedorUsuario>
-        <div className="d-flex flex-lg-row flex-column-reverse justify-content-center justify-content-lg-between align-items-center">
+        <div className="d-flex flex-lg-row flex-column-reverse justify-content-center justify-content-lg-between align-items-center mx-2">
           <h1 className="text-uppercase fs-4 fw-bold mt-lg-0 mt-5 titulo__home m-0">Productos Populares</h1>
           <Buscador />
         </div>
